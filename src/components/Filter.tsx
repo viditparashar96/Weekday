@@ -9,18 +9,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useState } from "react";
-// const names = [
-//   "Humaira Sims",
-//   "Santiago Solis",
-//   "Dawid Floyd",
-//   "Mateo Barlow",
-//   "Samia Navarro",
-//   "Kaden Fields",
-//   "Genevieve Watkins",
-//   "Mariah Hickman",
-//   "Rocco Richardson",
-//   "Harris Glenn",
-// ];
+
 interface MultiSelectProps {
   name: string;
   items: {

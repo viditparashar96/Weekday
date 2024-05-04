@@ -8,7 +8,9 @@ export const counterSlice = createSlice({
   },
   reducers: {
     addJobs: (state, action: any) => {
-      state.jobs = action.payload;
+      // console.log(action.payload.totalCount);
+      state.jobs = action.payload?.jdList;
+      state.totalCount = action.payload?.totalCount;
       // state.totalCount = action.payload.length;
     },
   },
