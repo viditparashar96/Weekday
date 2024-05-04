@@ -1,9 +1,10 @@
-export const fetchJobs = async () => {
+export const fetchJobs = async (page: number) => {
   try {
+    console.log("fetching jobs", page);
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     const body = JSON.stringify({
-      limit: 10,
+      limit: page * 10,
       offset: 0,
     });
 
