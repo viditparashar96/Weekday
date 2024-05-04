@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const counterSlice = createSlice({
   name: "jobs",
   initialState: {
-    jobs: [],
+    jobs: null,
+    totalCount: 0,
   },
   reducers: {
     addJobs: (state, action: any) => {
-      state.jobs.push(action?.payload);
+      state.jobs = action.payload;
+      // state.totalCount = action.payload.length;
     },
   },
 });
