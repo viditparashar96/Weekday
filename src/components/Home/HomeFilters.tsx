@@ -1,14 +1,9 @@
+import { MinExperience } from "../../constants/filter";
 import Filter from "../Filter";
-
 const HomeFilters = () => {
   return (
     <div>
-      <Filter />
-      <Filter />
-      <Filter />
-      <Filter />
-      <Filter />
-      <Filter />
+      <Filter items={MinExperience} name="Min Exp." isMultiSelect={false} />
     </div>
   );
 };
