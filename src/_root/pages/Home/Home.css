@@ -1,0 +1,10 @@
+.job_card_container {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding: 10px;
+  /* border: 1px solid #d6d1d1; */
+  border-radius: 5px;
+  margin: 0.5rem 0;
+  font-size: 9px;
+}

@@ -1,2 +1,3 @@
 import HomeFilters from "./Home/HomeFilters";
-export { HomeFilters };
+import FilterInput from "./shared/FilterInput";
+export { FilterInput, HomeFilters };

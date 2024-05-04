@@ -1,5 +1,22 @@
+import { useState } from "react";
 import "./JobCard.css";
-const JobCard = () => {
+export interface JobCardProps {
+  jdUid: string;
+  jdLink: string;
+  jobDetailsFromCompany: string;
+  maxJdSalary: number;
+  minJdSalary: number;
+  salaryCurrencyCode: string;
+  location: string;
+  minExp: number;
+  maxExp: number;
+  jobRole: string;
+  companyName: string;
+  logoUrl: string;
+}
+const JobCard = ({ job }: JobCardProps) => {
+  const [showmore, setShowmore] = useState(false);
+  const description = job?.jobDetailsFromCompany;
   return (
     <div className="jobcard">
       <div className="tag">
@@ -10,16 +27,16 @@ const JobCard = () => {
       <div className="jobcard__header">
         <div className="jobcard__header__logo__container">
           <img
-            src="https://via.placeholder.com/150"
+            src={job?.logoUrl}
             alt="company logo"
             className="jobcard__header__logo"
           />
         </div>
         <div className="jobcard__header__details">
-          <div className="jobcard__header__company">Company</div>
-          <div className="jobcard__header__role">Senior Engineer</div>
+          <div className="jobcard__header__company">{job?.companyName}</div>
+          <div className="jobcard__header__role">{job?.jobRole}</div>
           <div className="jobcard__header__location">
-            Location <span>| Exp 5-5 years</span>
+            {job?.location.charAt(0).toUpperCase() + job?.location.slice(1)}
           </div>
         </div>
       </div>
@@ -27,23 +44,69 @@ const JobCard = () => {
       <div className="jobcard__Jobsalary">
         <span className="jobcard__Jobsalary_title">
           {" "}
-          Estimated Salary: ₹30 - 60 LPA
+          Estimated Salary:{" "}
+          {`$${job?.minJdSalary ? job?.minJdSalary : "Not Mentioned"}${
+            !job?.minJdSalary ? "" : "k"
+          } - $${job?.maxJdSalary ? job?.maxJdSalary : "Not Mentioned"}${
+            !job?.maxJdSalary ? "" : "k"
+          } `}
         </span>
-        <span> ✅</span>
+        <span className="jobcard__Jobsalary_title_CheckMark"> ✅</span>
       </div>
       {/* BODY */}
       <div className="jobcard__body">
         <h3 className="jobcard__body__title">About Job:</h3>
         <h5 className="jobcard__body__description">Description</h5>
         <p className="jobcard__body__description_details">
-          Flex Wash is an operating system for the car wash industry. Our
-          solutions help owners manage their operations and grow revenue. Our
-          POS has a built-in CRM, allowing car washes to take advantage of their
-          customer transaction history in order to funnel customers into
-          subscriptions and higher margin wash packages..
+          {showmore ? description + "..." : description.slice(0, 400) + "..."}
+          <span>
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowmore(!showmore);
+              }}
+            >
+              {showmore ? "Show Less" : "Show More"}
+            </a>
+          </span>
         </p>
         <div className="view_job">
           <a href="/">View Job</a>
+        </div>
+      </div>
+      {/* FOOTER */}
+      <div className="jobcard__footer">
+        <div className="jobcard__footer__Exp">
+          <span style={{ opacity: "60%", fontWeight: 500, fontSize: "0.9rem" }}>
+            Minimum Experience
+          </span>
+          <br />
+          <span
+            style={{
+              marginTop: 4,
+              display: "block",
+              fontWeight: 200,
+              fontSize: "0.9rem",
+            }}
+          >
+            {!job?.minExp ? "Not Mentioned" : job?.minExp + ""}
+            <span
+              style={{
+                opacity: "80%",
+              }}
+            >
+              {job?.minExp ? " Years" : ""}
+            </span>
+          </span>
+        </div>
+        <div className="jobcard__footer__apply">
+          <button className="jobcard__footer__apply_button">
+            ⚡Easy Apply
+          </button>
+          <button className="jobcard__footer__referral_button">
+            ⚡Unlock referral asks
+          </button>
         </div>
       </div>
     </div>
