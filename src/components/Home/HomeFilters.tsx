@@ -14,13 +14,9 @@ import FilterInput from "../shared/FilterInput";
 import "./HomeFilter.css";
 const HomeFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const jobs = useSelector((state: any) => state.job.jobs);
   const originalJobs = useSelector((state: any) => state.job.originalJobs);
-  console.log("ORIGIANL jobs===>", jobs);
 
   const dispatch = useDispatch();
-  console.log("jobs===>", jobs);
-  console.log("searchParams===>", searchParams);
 
   useEffect(() => {
     const location = searchParams.get("Location") || "";
@@ -33,9 +29,6 @@ const HomeFilters = () => {
     const BasePay = searchParams.get("Base pay") || "";
     const CompanyName = searchParams.get("Company Name") || "";
     const Remote = searchParams.get("Remote") || "";
-    console.log("location===>", location);
-    console.log("role===>", role);
-    console.log("minExp===>", minExp);
     if (originalJobs?.length > 0) {
       let filteredJobs = originalJobs;
       if (location) {
@@ -75,7 +68,6 @@ const HomeFilters = () => {
         );
       }
 
-      console.log("filteredJobs===>", filteredJobs);
       // if (filteredJobs.length > 0) {
       dispatch(filterJobs(filteredJobs));
       // }

@@ -24,12 +24,9 @@ export default function MultiSelect({
   items,
   isMultiSelect,
 }: MultiSelectProps) {
-  const [selectedValues, setselectedValues] = useState([]);
   const [multiSelectedValues, setMultiSelectedValues] = useState<
     null | string[]
   >(null);
-  console.log(selectedValues);
-  console.log(multiSelectedValues);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const handleSingleSelect = (e: any) => {
@@ -58,7 +55,6 @@ export default function MultiSelect({
       setSearchParams(updatedSearchParams.toString());
       return;
     }
-    setselectedValues(newValue);
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set(name, newValue);
     setSearchParams(updatedSearchParams.toString());
@@ -66,7 +62,6 @@ export default function MultiSelect({
 
   const handleMultiSelect = (e: any) => {
     const newValue = e.target.value;
-    console.log("new value===<", name, newValue);
     setMultiSelectedValues(newValue);
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set(name, newValue.join(","));
@@ -74,7 +69,9 @@ export default function MultiSelect({
   };
 
   const handleOnDelete = (value: string) => {
-    const updatedValues = multiSelectedValues?.filter((item) => item !== value);
+    const updatedValues: any = multiSelectedValues?.filter(
+      (item) => item !== value
+    );
     setMultiSelectedValues(updatedValues);
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set(name, updatedValues?.join(","));

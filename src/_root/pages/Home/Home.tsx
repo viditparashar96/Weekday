@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { HomeFilters } from "../../../components";
+import { HomeFilters, Loader } from "../../../components";
 import JobCard, {
   JobCardProps,
 } from "../../../components/Home/Jobcard/JobCard";
@@ -18,14 +18,12 @@ const Home = () => {
     setLoading(true);
     try {
       const data = await fetchJobs(page);
-      console.log(data);
       dispatch(addOriginalJobs(data));
       dispatch(addJobs(data));
       setPage(page + 1);
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
@@ -66,6 +64,20 @@ const Home = () => {
 
       {jobs?.length === 0 && <p>No jobs found</p>}
 
+      {loading && (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
+          <Loader />
+        </div>
+      )}
+
       <div style={{ minHeight: "90vh" }}>
         <InfiniteScroll
           dataLength={jobs?.length || 10}
@@ -85,14 +97,7 @@ const Home = () => {
             ))}
           </div>
         </InfiniteScroll>
-        {/* {error && <p>Error: {error.message}</p>} */}
       </div>
-
-      {/* <div className="job_card_container">
-        {jobs?.map((job: JobCardProps) => (
-          <JobCard job={job} />
-        ))}
-      </div> */}
     </Layout>
   );
 };

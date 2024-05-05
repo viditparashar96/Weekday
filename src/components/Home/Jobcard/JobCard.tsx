@@ -4,24 +4,25 @@ export interface JobCardProps {
   jdUid: string;
   jdLink: string;
   jobDetailsFromCompany: string;
-  maxJdSalary: number;
-  minJdSalary: number;
+  maxJdSalary: number | null;
+  minJdSalary: number | null;
   salaryCurrencyCode: string;
   location: string;
-  minExp: number;
-  maxExp: number;
+  minExp: number | null;
+  maxExp: number | null;
   jobRole: string;
   companyName: string;
   logoUrl: string;
 }
-const JobCard = ({ job }: JobCardProps) => {
+const JobCard = ({ job }: any) => {
+  const postDate = Math.floor(Math.random() * 15) + 1;
   const [showmore, setShowmore] = useState(false);
   const description = job?.jobDetailsFromCompany;
   return (
     <div className="jobcard">
       <div className="tag">
         <span>⌛</span>
-        <span>Posted 15 days ago</span>
+        <span>Posted {postDate} days ago</span>
       </div>
       {/* Header */}
       <div className="jobcard__header">

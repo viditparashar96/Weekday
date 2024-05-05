@@ -1,6 +1,5 @@
 export const fetchJobs = async (page: number) => {
   try {
-    console.log("fetching jobs", page);
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     const body = JSON.stringify({
@@ -21,6 +20,6 @@ export const fetchJobs = async (page: number) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
   }
 };

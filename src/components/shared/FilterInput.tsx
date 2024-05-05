@@ -1,8 +1,10 @@
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-const FilterInput = ({ name }) => {
+interface FilterInputProps {
+  name: string;
+}
+const FilterInput = ({ name }: FilterInputProps) => {
   const [value, setValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const handleChange = (e: any) => {
@@ -18,7 +20,6 @@ const FilterInput = ({ name }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("value===>", value);
       if (value === "") return;
       const updatedSearchParams = new URLSearchParams(searchParams);
       updatedSearchParams.set(name, value);
