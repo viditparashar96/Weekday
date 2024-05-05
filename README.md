@@ -2,6 +2,12 @@
 
 This project is an assignment aimed at creating a candidate application platform using ReactJs, Redux, CSS, and Material UI. The platform allows users to view job listings, filter jobs based on various criteria, and implements infinite scroll for a seamless browsing experience.
 
+# Hosted URL
+
+```
+https://weekday-gules.vercel.app/
+```
+
 # Setup Instructions
 
 1. Clone the repository.
