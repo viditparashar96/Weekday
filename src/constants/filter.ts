@@ -58,3 +58,7 @@ export const MinBasePay = [
   { value: 90, label: "90k" },
   { value: 100, label: "100k" },
 ];
+export const Remote = [
+  { value: "Yes", label: "Yes" },
+  { value: "No", label: "No" },
+];

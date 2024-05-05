@@ -14,11 +14,9 @@ const Home = () => {
   const jobs = useSelector((state: any) => state.job.jobs);
   const [page, setPage] = useState<number>(3);
   const [loading, setLoading] = useState(false);
-  const [searchParams, setSearchParams] = useState("");
   const fetch = async () => {
     setLoading(true);
     try {
-      setSearchParams("");
       const data = await fetchJobs(page);
       console.log(data);
       dispatch(addOriginalJobs(data));
@@ -66,14 +64,20 @@ const Home = () => {
     <Layout>
       <HomeFilters />
 
+      {jobs?.length === 0 && <p>No jobs found</p>}
+
       <div style={{ minHeight: "90vh" }}>
         <InfiniteScroll
           dataLength={jobs?.length || 10}
           next={fetch}
           hasMore={true}
-          loader={<p>Loading...</p>}
+          loader={
+            jobs.length > 0 && (
+              <h4 style={{ textAlign: "center" }}>Loading...</h4>
+            )
+          }
           endMessage={<p>No more data to load.</p>}
-          scrollThreshold={0.5}
+          scrollThreshold={0.8}
         >
           <div className="job_card_container">
             {jobs?.map((job: JobCardProps) => (

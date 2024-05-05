@@ -53,6 +53,12 @@ export default function MultiSelect({
       setSearchParams(updatedSearchParams.toString());
       return;
     }
+    if (name === "Remote" && newValue === "No") {
+      const updatedSearchParams = new URLSearchParams(searchParams);
+      updatedSearchParams.delete(name);
+      setSearchParams(updatedSearchParams.toString());
+      return;
+    }
     setselectedValues(newValue);
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set(name, newValue);

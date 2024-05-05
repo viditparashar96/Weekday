@@ -5,13 +5,15 @@ import {
   Location,
   MinBasePay,
   MinExperience,
+  Remote,
   Role,
 } from "../../constants/filter";
 import { filterJobs } from "../../libs/features/jobs/jobSlice";
 import Filter from "../shared/Filter";
 import FilterInput from "../shared/FilterInput";
+import "./HomeFilter.css";
 const HomeFilters = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const jobs = useSelector((state: any) => state.job.jobs);
   const originalJobs = useSelector((state: any) => state.job.originalJobs);
   console.log("ORIGIANL jobs===>", jobs);
@@ -30,6 +32,7 @@ const HomeFilters = () => {
     const minExp = searchParams.get("Min Exp") || "";
     const BasePay = searchParams.get("Base pay") || "";
     const CompanyName = searchParams.get("Company Name") || "";
+    const Remote = searchParams.get("Remote") || "";
     console.log("location===>", location);
     console.log("role===>", role);
     console.log("minExp===>", minExp);
@@ -61,18 +64,24 @@ const HomeFilters = () => {
           job.companyName.toLowerCase().includes(CompanyName.toLowerCase())
         );
       }
+      if (Remote) {
+        filteredJobs = filteredJobs.filter(
+          (job: any) => job.location === "remote"
+        );
+      }
 
       console.log("filteredJobs===>", filteredJobs);
-      if (filteredJobs.length > 0) {
-        dispatch(filterJobs(filteredJobs));
-      }
+      // if (filteredJobs.length > 0) {
+      dispatch(filterJobs(filteredJobs));
+      // }
     }
   }, [searchParams, dispatch]);
   return (
-    <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
+    <div className="homeFilter">
       <Filter items={Role} name="Role" isMultiSelect={true} />
 
       <Filter items={Location} name="Location" isMultiSelect={false} />
+      <Filter items={Remote} name="Remote" isMultiSelect={false} />
       <Filter items={MinExperience} name="Min Exp" isMultiSelect={false} />
       <Filter items={MinBasePay} name="Base pay" isMultiSelect={false} />
 
