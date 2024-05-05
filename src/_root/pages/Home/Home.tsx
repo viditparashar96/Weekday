@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
 import { HomeFilters } from "../../../components";
 import JobCard, {
   JobCardProps,
 } from "../../../components/Home/Jobcard/JobCard";
 import { fetchJobs } from "../../../libs/actions/job.action";
-import { addJobs } from "../../../libs/features/jobs/jobSlice";
+import { addJobs, addOriginalJobs } from "../../../libs/features/jobs/jobSlice";
 import Layout from "../../Layout";
 import "./Home.css";
 const Home = () => {
   const dispatch = useDispatch();
   const jobs = useSelector((state: any) => state.job.jobs);
-  const [page, setPage] = useState<number>(2);
+  const [page, setPage] = useState<number>(3);
   const [loading, setLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useState("");
   const fetch = async () => {
     setLoading(true);
     try {
-      // setSearchParams("");
+      setSearchParams("");
       const data = await fetchJobs(page);
       console.log(data);
+      dispatch(addOriginalJobs(data));
       dispatch(addJobs(data));
       setPage(page + 1);
 
@@ -66,13 +66,14 @@ const Home = () => {
     <Layout>
       <HomeFilters />
 
-      <div>
+      <div style={{ minHeight: "90vh" }}>
         <InfiniteScroll
           dataLength={jobs?.length || 10}
           next={fetch}
           hasMore={true}
           loader={<p>Loading...</p>}
           endMessage={<p>No more data to load.</p>}
+          scrollThreshold={0.5}
         >
           <div className="job_card_container">
             {jobs?.map((job: JobCardProps) => (

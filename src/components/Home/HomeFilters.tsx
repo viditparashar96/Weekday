@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { Location, MinExperience, Role } from "../../constants/filter";
+import {
+  Location,
+  MinBasePay,
+  MinExperience,
+  Role,
+} from "../../constants/filter";
 import { filterJobs } from "../../libs/features/jobs/jobSlice";
 import Filter from "../shared/Filter";
 import FilterInput from "../shared/FilterInput";
@@ -23,6 +28,8 @@ const HomeFilters = () => {
         ?.split(",")
         .filter((item) => item !== "") || [];
     const minExp = searchParams.get("Min Exp") || "";
+    const BasePay = searchParams.get("Base pay") || "";
+    const CompanyName = searchParams.get("Company Name") || "";
     console.log("location===>", location);
     console.log("role===>", role);
     console.log("minExp===>", minExp);
@@ -43,6 +50,17 @@ const HomeFilters = () => {
           (job: any) => job.minExp === parseInt(minExp)
         );
       }
+      if (BasePay) {
+        filteredJobs = filteredJobs.filter(
+          (job: any) =>
+            job.minJdSalary !== null && job.minJdSalary >= parseInt(BasePay)
+        );
+      }
+      if (CompanyName) {
+        filteredJobs = filteredJobs.filter((job: any) =>
+          job.companyName.toLowerCase().includes(CompanyName.toLowerCase())
+        );
+      }
 
       console.log("filteredJobs===>", filteredJobs);
       if (filteredJobs.length > 0) {
@@ -56,7 +74,8 @@ const HomeFilters = () => {
 
       <Filter items={Location} name="Location" isMultiSelect={false} />
       <Filter items={MinExperience} name="Min Exp" isMultiSelect={false} />
-      <FilterInput name="Min base pay" />
+      <Filter items={MinBasePay} name="Base pay" isMultiSelect={false} />
+
       <FilterInput name="Company Name" />
     </div>
   );

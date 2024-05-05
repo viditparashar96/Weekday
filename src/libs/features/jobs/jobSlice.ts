@@ -8,8 +8,10 @@ export const counterSlice = createSlice({
     totalCount: 0,
   },
   reducers: {
-    addJobs: (state, action: any) => {
+    addOriginalJobs: (state, action: any) => {
       state.originalJobs = action.payload?.jdList;
+    },
+    addJobs: (state, action: any) => {
       state.jobs = action.payload?.jdList;
       state.totalCount = action.payload?.totalCount;
     },
@@ -20,6 +22,6 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addJobs, filterJobs } = counterSlice.actions;
+export const { addJobs, filterJobs, addOriginalJobs } = counterSlice.actions;
 
 export default counterSlice.reducer;

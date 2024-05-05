@@ -1,4 +1,5 @@
 export const MinExperience = [
+  { value: "None", label: "None" },
   { value: 0, label: "0 Years" },
   { value: 1, label: "1 Year" },
   { value: 2, label: "2 Years" },
@@ -18,6 +19,8 @@ export const MinExperience = [
 ];
 
 export const Location = [
+  { value: "None", label: "None" },
+
   { value: "delhi ncr", label: "Delhi NCR" },
   { value: "mumbai", label: "Mumbai" },
   { value: "bangalore", label: "Bangalore" },
@@ -30,6 +33,7 @@ export const Location = [
 ];
 
 export const Role = [
+  { value: "All", label: "All" },
   { value: "frontend", label: "Frontend Developer" },
   { value: "backend", label: "Backend Developer" },
   { value: "fullstack", label: "Fullstack Developer" },
@@ -40,4 +44,17 @@ export const Role = [
   { value: "product", label: "Product Manager" },
   { value: "tech lead", label: "Tech Lead" },
   { value: "engineering manager", label: "Engineering Manager" },
+];
+export const MinBasePay = [
+  { value: "None", label: "None" },
+  { value: 10, label: "10k" },
+  { value: 20, label: "20k" },
+  { value: 30, label: "30k" },
+  { value: 40, label: "40k" },
+  { value: 50, label: "50k" },
+  { value: 60, label: "60k" },
+  { value: 70, label: "70k" },
+  { value: 80, label: "80k" },
+  { value: 90, label: "90k" },
+  { value: 100, label: "100k" },
 ];
