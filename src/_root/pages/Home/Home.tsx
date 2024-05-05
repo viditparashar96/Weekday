@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { HomeFilters } from "../../../components";
 import JobCard, {
   JobCardProps,
@@ -12,16 +13,18 @@ import "./Home.css";
 const Home = () => {
   const dispatch = useDispatch();
   const jobs = useSelector((state: any) => state.job.jobs);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(2);
   const [loading, setLoading] = useState(false);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const fetch = async () => {
     setLoading(true);
     try {
+      // setSearchParams("");
       const data = await fetchJobs(page);
       console.log(data);
       dispatch(addJobs(data));
       setPage(page + 1);
+
       setLoading(false);
     } catch (error) {
       console.log(error);

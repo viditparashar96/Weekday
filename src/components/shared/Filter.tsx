@@ -9,6 +9,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface MultiSelectProps {
   name: string;
@@ -24,7 +25,36 @@ export default function MultiSelect({
   isMultiSelect,
 }: MultiSelectProps) {
   const [selectedValues, setselectedValues] = useState([]);
+  const [multiSelectedValues, setMultiSelectedValues] = useState<
+    null | string[]
+  >(null);
   console.log(selectedValues);
+  console.log(multiSelectedValues);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const handleSingleSelect = (e: any) => {
+    const newValue = e.target.value;
+    setselectedValues(newValue);
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set(name, newValue);
+    setSearchParams(updatedSearchParams.toString());
+  };
+
+  const handleMultiSelect = (e: any) => {
+    const newValue = e.target.value;
+    setMultiSelectedValues(newValue);
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set(name, newValue.join(","));
+    setSearchParams(updatedSearchParams.toString());
+  };
+
+  const handleOnDelete = (value: string) => {
+    const updatedValues = multiSelectedValues?.filter((item) => item !== value);
+    setMultiSelectedValues(updatedValues);
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set(name, updatedValues?.join(","));
+    setSearchParams(updatedSearchParams.toString());
+  };
 
   if (!isMultiSelect) {
     return (
@@ -32,8 +62,9 @@ export default function MultiSelect({
         <InputLabel>{name}</InputLabel>
         <Select
           variant="standard"
-          value={selectedValues}
-          onChange={(e: any) => setselectedValues(e.target.value)}
+          className="MuiSelect-standard"
+          value={searchParams.get(name) || ""}
+          onChange={(e: any) => handleSingleSelect(e)}
           input={<OutlinedInput label="Single Select" />}
         >
           {items.map((name) => (
@@ -50,21 +81,18 @@ export default function MultiSelect({
         <InputLabel>{name}</InputLabel>
         <Select
           variant="standard"
+          className="MuiSelect-standard"
           multiple
-          value={selectedValues}
-          onChange={(e: any) => setselectedValues(e.target.value)}
+          value={(searchParams.get(name) || "").split(",")}
+          onChange={(e: any) => handleMultiSelect(e)}
           input={<OutlinedInput label="Multiple Select" />}
           renderValue={(selected) => (
             <Stack gap={1} direction="row" flexWrap="wrap">
-              {selected.map((value) => (
+              {selected?.map((value) => (
                 <Chip
                   key={value}
                   label={value}
-                  onDelete={() =>
-                    setselectedValues(
-                      selectedValues.filter((item) => item !== value)
-                    )
-                  }
+                  onDelete={() => handleOnDelete(value)}
                   deleteIcon={
                     <CancelIcon
                       onMouseDown={(event) => event.stopPropagation()}
