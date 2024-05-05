@@ -28,10 +28,10 @@ export default function MultiSelect({
 
   if (!isMultiSelect) {
     return (
-      <FormControl sx={{ m: 1, minWidth: 200, maxWidth: 400 }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel>{name}</InputLabel>
         <Select
-          sx={{ minHeight: 50 }}
+          variant="standard"
           value={selectedValues}
           onChange={(e: any) => setselectedValues(e.target.value)}
           input={<OutlinedInput label="Single Select" />}
@@ -46,10 +46,10 @@ export default function MultiSelect({
     );
   } else {
     return (
-      <FormControl sx={{ m: 1, minWidth: 200, maxWidth: 400 }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel>{name}</InputLabel>
         <Select
-          sx={{ minHeight: 50 }}
+          variant="standard"
           multiple
           value={selectedValues}
           onChange={(e: any) => setselectedValues(e.target.value)}
