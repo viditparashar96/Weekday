@@ -72,7 +72,7 @@ const Home = () => {
           next={fetch}
           hasMore={true}
           loader={
-            jobs.length > 0 && (
+            jobs?.length > 0 && (
               <h4 style={{ textAlign: "center" }}>Loading...</h4>
             )
           }

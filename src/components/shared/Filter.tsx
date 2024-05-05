@@ -34,7 +34,6 @@ export default function MultiSelect({
   const [searchParams, setSearchParams] = useSearchParams();
   const handleSingleSelect = (e: any) => {
     const newValue = e.target.value;
-    console.log("new value===<", name, newValue);
     if (name === "Min Exp" && newValue === "None") {
       const updatedSearchParams = new URLSearchParams(searchParams);
       updatedSearchParams.delete(name);
@@ -67,6 +66,7 @@ export default function MultiSelect({
 
   const handleMultiSelect = (e: any) => {
     const newValue = e.target.value;
+    console.log("new value===<", name, newValue);
     setMultiSelectedValues(newValue);
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set(name, newValue.join(","));
@@ -108,7 +108,11 @@ export default function MultiSelect({
           variant="standard"
           className="MuiSelect-standard"
           multiple
-          value={(searchParams.get(name) || "").split(",")}
+          value={
+            (searchParams.get(name) || "")
+              .split(",")
+              .filter((item) => item !== "") || []
+          }
           onChange={(e: any) => handleMultiSelect(e)}
           input={<OutlinedInput label="Multiple Select" />}
           renderValue={(selected) => (

@@ -13,7 +13,7 @@ import Filter from "../shared/Filter";
 import FilterInput from "../shared/FilterInput";
 import "./HomeFilter.css";
 const HomeFilters = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const jobs = useSelector((state: any) => state.job.jobs);
   const originalJobs = useSelector((state: any) => state.job.originalJobs);
   console.log("ORIGIANL jobs===>", jobs);
@@ -42,6 +42,11 @@ const HomeFilters = () => {
         filteredJobs = filteredJobs.filter(
           (job: any) => job.location === location
         );
+      }
+      if (role.length === 0) {
+        const updatedSearchParams = new URLSearchParams(searchParams);
+        updatedSearchParams.delete("Role");
+        setSearchParams(updatedSearchParams.toString());
       }
       if (role.length > 0) {
         filteredJobs = filteredJobs.filter((job: any) =>

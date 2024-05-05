@@ -58,6 +58,12 @@ const JobCard = ({ job }: JobCardProps) => {
         <h3 className="jobcard__body__title">About Job:</h3>
         <h5 className="jobcard__body__description">Description</h5>
         <p className="jobcard__body__description_details">
+          <div
+            className="jobcard_shadow"
+            style={
+              showmore ? { filter: "none", backgroundColor: "transparent" } : {}
+            }
+          ></div>
           {showmore ? description + "..." : description.slice(0, 400) + "..."}
           <span>
             <a
