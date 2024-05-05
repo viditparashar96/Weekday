@@ -1,4 +1,8 @@
 .homeFilter {
   display: flex;
   flex-wrap: wrap;
+  position: sticky;
+  background-color: white;
+  z-index: 9999;
+  top: 0;
 }

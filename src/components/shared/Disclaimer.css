@@ -1,0 +1,26 @@
+.disclaimer_container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.disclaimer {
+  font-size: 0.8rem;
+  padding: 6px 20px;
+  color: #666;
+  margin-top: 1rem;
+  border-radius: 100px;
+  width: 60%;
+  background-color: #d9fed3;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
+}
+
+@media screen and (max-width: 1200px) {
+  .disclaimer_container {
+    width: 100%;
+  }
+  .disclaimer {
+    width: 100%;
+    border-radius: 0;
+  }
+}

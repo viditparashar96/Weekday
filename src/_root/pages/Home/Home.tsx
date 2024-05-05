@@ -70,12 +70,12 @@ const Home = () => {
         <InfiniteScroll
           dataLength={jobs?.length || 10}
           next={fetch}
-          hasMore={true}
           loader={
             jobs?.length > 0 && (
               <h4 style={{ textAlign: "center" }}>Loading...</h4>
             )
           }
+          hasMore={true}
           endMessage={<p>No more data to load.</p>}
           scrollThreshold={0.8}
         >
