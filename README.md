@@ -49,26 +49,53 @@ This project is an assignment aimed at creating a candidate application platform
 
 ```
 candidate-application-platform/
+src/
 │
-├── public/
-│   └── index.html
+├── _root/
+│   ├── Layout.css
+│   └── Layout.tsx
 │
-├── src/
-│   ├── components/
-│   │   ├── JobCard.js
-│   │   ├── Filters.js
-│   │   └── InfiniteScroll.js
-│   ├── containers/
-│   │   ├── JobList.js
-│   │   └── App.js
-│   ├── actions/
-│   │   └── index.js
-│   ├── reducers/
-│   │   └── index.js
-│   └── styles/
-│       └── App.css
+├── pages/
+│   ├── Home.css
+│   └── Home.tsx
 │
-├── README.md
-└── package.json
+├── components/
+│   ├── index.ts
+│   │
+│   ├── shared/
+│   │   ├── Filter.css
+│   │   └── Filter.tsx
+│   │
+│   ├── jobCard/
+│   │   ├── JobCard.css
+│   │   └── JobCard.tsx
+│   │
+│   ├── Disclaimer/
+│   │   ├── Disclaimer.css
+│   │   └── Disclaimer.tsx
+│   │
+│   └── Loader/
+│       ├── Loader.css
+│       └── Loader.tsx
+│
+├── constants/
+│   ├── filter.ts
+│   └── index.ts
+│
+├── libs/
+│   ├── action/
+│   │   └── job.action.ts
+│   │
+│   ├── features/
+│   │   └── jobs/
+│   │       └── jobSlice.ts
+│   │
+│   └── store/
+│       └── store.ts
+│
+├── App.css
+|── App.tsx
+|── main.tsx
+
 
 ```
