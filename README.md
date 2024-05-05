@@ -13,7 +13,7 @@ https://weekday-gules.vercel.app/
 1. Clone the repository.
 2. Install dependencies using `npm install`.
 3. Run the application using `npm start`.
-4. Open the application in your browser at `http://localhost:3000`.
+4. Open the application in your browser at `http://localhost:5173`.
 
 ## Features
 
